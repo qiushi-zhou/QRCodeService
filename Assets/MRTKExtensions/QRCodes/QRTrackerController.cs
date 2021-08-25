@@ -84,8 +84,6 @@ namespace MRTKExtensions.QRCodes
 
         private void ProcessTrackingFound(object sender, QRInfo msg)
         {
-            sceneController.CompleteCalibration();
-
             if ( msg == null || !IsTrackingActive)
             {
                 return;
@@ -111,6 +109,7 @@ namespace MRTKExtensions.QRCodes
             markerDisplay.SetActive(true);
             PositionSet?.Invoke(this, pose);
             audioSource.Play();
+            sceneController.CompleteCalibration();
         }
 
         public EventHandler<Pose> PositionSet;
