@@ -8,6 +8,8 @@ namespace MRTKExtensions.QRCodes
     {
         [SerializeField]
         private SpatialGraphCoordinateSystemSetter spatialGraphCoordinateSystemSetter;
+        [SerializeField]
+        private SceneController sceneController;
 
         [SerializeField]
         private string locationQrValue = string.Empty;
@@ -82,6 +84,8 @@ namespace MRTKExtensions.QRCodes
 
         private void ProcessTrackingFound(object sender, QRInfo msg)
         {
+            sceneController.CompleteCalibration();
+
             if ( msg == null || !IsTrackingActive)
             {
                 return;
