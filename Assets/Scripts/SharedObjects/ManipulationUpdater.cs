@@ -24,7 +24,7 @@ public class ManipulationUpdater : MonoBehaviour
     void Start()
     {
         objectManipulator.OnManipulationStarted.AddListener(InteractStarted);
-        objectManipulator.OnManipulationStarted.AddListener(InteractEnded);
+        objectManipulator.OnManipulationEnded.AddListener(InteractEnded);
     }
 
     private void InteractStarted(ManipulationEventData arg0)
