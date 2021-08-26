@@ -101,9 +101,6 @@ public class UDPController : MonoBehaviour
             flippedObj.AddComponent<FlippedBehaviour>();
             gObj.GetComponent<FlippedBehaviour>().flippedObj = flippedObj;
             flippedObj.GetComponent<FlippedBehaviour>().flippedObj = gObj;
-
-            this.sceneController.sharedCount++; // need to remember that some messages may arrive OUT OR ORDER so CHECK THIS
-            this.sceneController.sharedObjMap.Add(createMessage.id, gObj.GetComponent<SharedObject>());
         }
         if (jm.message is ManipulateMessage)
         {
