@@ -71,6 +71,7 @@ public class UDPController : MonoBehaviour
             gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ConstraintManager>();
             gObj.AddComponent<Microsoft.MixedReality.Toolkit.Input.NearInteractionGrabbable>();
             gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ObjectManipulator>();
+            gObj.AddComponent<ManipulationUpdater>();
 
 
             this.sceneController.sharedCount++; // need to remember that some messages may arrive OUT OR ORDER so CHECK THIS
