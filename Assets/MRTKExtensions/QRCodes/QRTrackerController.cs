@@ -10,6 +10,8 @@ namespace MRTKExtensions.QRCodes
         private SpatialGraphCoordinateSystemSetter spatialGraphCoordinateSystemSetter;
         [SerializeField]
         private SceneController sceneController;
+        [SerializeField]
+        private GameObject QRCodeDisplayer;
 
         [SerializeField]
         private string locationQrValue = string.Empty;
@@ -106,10 +108,11 @@ namespace MRTKExtensions.QRCodes
         private void SetScale(object sender, Pose pose)
         {
             markerHolder.localScale = Vector3.one * lastMessage.PhysicalSideLength;
-            markerDisplay.SetActive(true);
+            //markerDisplay.SetActive(true);
             PositionSet?.Invoke(this, pose);
             audioSource.Play();
             sceneController.CompleteCalibration();
+            QRCodeDisplayer.SetActive(false);
         }
 
         public EventHandler<Pose> PositionSet;
