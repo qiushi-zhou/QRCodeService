@@ -9,7 +9,7 @@ public class ManipulationUpdater : MonoBehaviour
 
     SharedObject sObj;
     ObjectManipulator objectManipulator;
-    UDPController udpController;
+    public UDPController udpController;
 
     private bool isInteracted = false;
 
@@ -17,7 +17,6 @@ public class ManipulationUpdater : MonoBehaviour
     {
         sObj = this.gameObject.GetComponent<SharedObject>();
         objectManipulator = this.gameObject.GetComponent<ObjectManipulator>();
-        udpController = GameObject.Find("Network").GetComponentInChildren<UDPController>();
     }
 
     // Start is called before the first frame update
