@@ -42,6 +42,7 @@ public class ManipulationUpdater : MonoBehaviour
         if (this.isInteracted)
         {
             this.udpController.SendManipulateMessage(this.sObj.id, this.transform.position, this.transform.forward, this.transform.up);
+            //Debug.Log("SendManipulateMessage obj id: " + this.sObj.id);
         }
     }
 

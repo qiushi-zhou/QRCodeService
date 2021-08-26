@@ -167,7 +167,7 @@ public class UDPController : MonoBehaviour
     {
 #if !UNITY_EDITOR
         JsonMessage jm = new JsonMessage();
-        jm.action = JsonMessage.Type.CREATE;
+        jm.action = JsonMessage.Type.MANIPULATE;
         ManipulateMessage manipulateMsg = new ManipulateMessage();
         manipulateMsg.id = id;
         manipulateMsg.position = position;

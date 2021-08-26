@@ -50,6 +50,7 @@ public class SceneController : MonoBehaviour
 
         //send Calibration Done message
         this.udpController.SendCalibrationDoneMessage();
+        //this.udpController.SendManipulateMessage(0, Vector3.zero, Vector3.zero, Vector3.zero);
     }
 
 }
