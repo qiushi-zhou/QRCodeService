@@ -44,7 +44,7 @@ public class ManipulationUpdater : MonoBehaviour
         {
             this.udpController.SendManipulateMessage(
                 this.sObj.id, 
-                this.mirrorObj.transform.InverseTransformPoint( new Vector3(this.transform.position.x * -1f, this.transform.position.y, this.transform.position.z)), 
+                this.mirrorObj.transform.InverseTransformPoint(this.transform.position), 
                 this.mirrorObj.transform.InverseTransformDirection(this.transform.forward), 
                 this.mirrorObj.transform.InverseTransformDirection(this.transform.up)
                 );

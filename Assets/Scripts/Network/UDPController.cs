@@ -176,7 +176,7 @@ public class UDPController : MonoBehaviour
         jm.action = JsonMessage.Type.MANIPULATE;
         ManipulateMessage manipulateMsg = new ManipulateMessage();
         manipulateMsg.id = id;
-        manipulateMsg.position = position;
+        manipulateMsg.position = new Vector3(position.x * -1, position.y, position.z);
         manipulateMsg.forward = forward;
         manipulateMsg.forward = upward;
         jm.message = manipulateMsg;
