@@ -11,7 +11,7 @@ public class ManipulationUpdater : MonoBehaviour
     ObjectManipulator objectManipulator;
     UDPController udpController;
 
-    public bool isInteracted = false;
+    private bool isInteracted = false;
 
     private void Awake()
     {

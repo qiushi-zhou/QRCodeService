@@ -59,23 +59,43 @@ public class UDPController : MonoBehaviour
 
             CreateMessage createMessage = (CreateMessage)jm.message;
 
+            //creates an object in relation to MIRROR SPACE
             Vector3 Pos = this.sceneController.mirrorObj.transform.TransformPoint(createMessage.position);
             Vector3 forward = this.sceneController.mirrorObj.transform.TransformDirection(createMessage.forward);
             Vector3 Upward = this.sceneController.mirrorObj.transform.TransformDirection(createMessage.upward);
 
-            GameObject gObj = (GameObject)Resources.Load("sharedPrefabs/"+createMessage.prefabName, typeof(GameObject));
-            Instantiate(gObj, Pos, Quaternion.LookRotation(forward,Upward));
+            GameObject prefab = (GameObject)Resources.Load("sharedPrefabs/"+createMessage.prefabName, typeof(GameObject));
+            GameObject gObj = Instantiate(prefab, Pos, Quaternion.LookRotation(forward,Upward));
             Debug.Log("created at: "+ createMessage.position);
 
             //add hololens specific scripts
             gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ConstraintManager>();
             gObj.AddComponent<Microsoft.MixedReality.Toolkit.Input.NearInteractionGrabbable>();
             gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ObjectManipulator>();
-            gObj.AddComponent<ManipulationUpdater>();
+            gObj.AddComponent<ManipulationUpdater>(); // do not add this to mirrored obj
 
 
             this.sceneController.sharedCount++; // need to remember that some messages may arrive OUT OR ORDER so CHECK THIS
-            this.sceneController.sharedObjMap.Add(createMessage.id, gObj.GetComponent<SharedObject>()); 
+            this.sceneController.sharedObjMap.Add(createMessage.id, gObj.GetComponent<SharedObject>());
+
+
+            //create a Mirrored object representing REAL SPACE
+            Vector3 flippedPosition = createMessage.position;
+            flippedPosition.y = -flippedPosition.y;
+            flippedPosition = this.sceneController.mirrorObj.transform.TransformPoint(flippedPosition);
+            //using same forward and up for now..  might need to flip these as well wrt to mirrorObj
+            GameObject flippedObj = Instantiate(prefab, flippedPosition, Quaternion.LookRotation(forward, Upward));
+
+            //add hololens specific scripts to flipped obj
+            flippedObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ConstraintManager>();
+            flippedObj.AddComponent<Microsoft.MixedReality.Toolkit.Input.NearInteractionGrabbable>();
+            flippedObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ObjectManipulator>();
+
+            //attach script to make flipped object mirror the original gObj and vice versa
+            gObj.AddComponent<FlippedBehaviour>();
+            flippedObj.AddComponent<FlippedBehaviour>();
+            gObj.GetComponent<FlippedBehaviour>().flippedObj = flippedObj;
+            flippedObj.GetComponent<FlippedBehaviour>().flippedObj = gObj;
         }
         if (jm.message is ManipulateMessage)
         {
