@@ -77,7 +77,9 @@ public class UDPController : MonoBehaviour
             gObj.AddComponent<Microsoft.MixedReality.Toolkit.Input.NearInteractionGrabbable>();
             gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ObjectManipulator>();
             gObj.AddComponent<ManipulationUpdater>(); // do not add this to flippedObj
+
             gObj.GetComponent<ManipulationUpdater>().udpController = this;
+            gObj.GetComponent<ManipulationUpdater>().mirrorObj = this.sceneController.mirrorObj;
 
 
             this.sceneController.sharedCount++; // need to remember that some messages may arrive OUT OR ORDER so CHECK THIS
