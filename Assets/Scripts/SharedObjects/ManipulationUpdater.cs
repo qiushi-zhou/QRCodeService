@@ -10,6 +10,7 @@ public class ManipulationUpdater : MonoBehaviour
     SharedObject sObj;
     ObjectManipulator objectManipulator;
     public UDPController udpController;
+    public GameObject mirrorObj;
 
     private bool isInteracted = false;
 
@@ -41,7 +42,12 @@ public class ManipulationUpdater : MonoBehaviour
     {
         if (this.isInteracted)
         {
-            this.udpController.SendManipulateMessage(this.sObj.id, this.transform.position, this.transform.forward, this.transform.up);
+            this.udpController.SendManipulateMessage(
+                this.sObj.id, 
+                this.mirrorObj.transform.InverseTransformPoint(this.transform.position), 
+                this.mirrorObj.transform.InverseTransformDirection(this.transform.forward), 
+                this.mirrorObj.transform.InverseTransformDirection(this.transform.up)
+                );
             //Debug.Log("SendManipulateMessage obj id: " + this.sObj.id);
         }
     }
