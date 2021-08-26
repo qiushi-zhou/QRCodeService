@@ -67,6 +67,11 @@ public class UDPController : MonoBehaviour
             Instantiate(gObj, Pos, Quaternion.LookRotation(forward,Upward));
             Debug.Log("created at: "+ createMessage.position);
 
+            //add hololens specific scripts
+            gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ConstraintManager>();
+            gObj.AddComponent<Microsoft.MixedReality.Toolkit.Input.NearInteractionGrabbable>();
+            gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ObjectManipulator>();
+
 
             this.sceneController.sharedCount++; // need to remember that some messages may arrive OUT OR ORDER so CHECK THIS
             this.sceneController.sharedObjMap.Add(createMessage.id, gObj.GetComponent<SharedObject>()); 

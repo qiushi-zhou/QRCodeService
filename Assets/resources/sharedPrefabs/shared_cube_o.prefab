@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 2393787007029667741}
   - component: {fileID: 2577903518477891643}
   - component: {fileID: 2078937283224877990}
+  - component: {fileID: 7548282206503331101}
   m_Layer: 0
-  m_Name: shared_cube
+  m_Name: shared_cube_o
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,5 +107,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b11ec35f5ff3f1479c6c5a4213dec8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   prefabName: shared_cube
   isBodyAnchored: 0
+--- !u!114 &7548282206503331101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078937283224877991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c70ca572bc9254eb22e42a1cc393f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInteracted: 0
