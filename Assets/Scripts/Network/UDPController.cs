@@ -68,6 +68,10 @@ public class UDPController : MonoBehaviour
             GameObject gObj = Instantiate(prefab, Pos, Quaternion.LookRotation(forward,Upward));
             Debug.Log("created at: "+ createMessage.position);
 
+            //update id of sharedObj
+            gObj.GetComponent<SharedObject>().id = createMessage.id;
+
+
             //add hololens specific scripts
             gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ConstraintManager>();
             gObj.AddComponent<Microsoft.MixedReality.Toolkit.Input.NearInteractionGrabbable>();
@@ -97,6 +101,9 @@ public class UDPController : MonoBehaviour
             flippedObj.AddComponent<FlippedBehaviour>();
             gObj.GetComponent<FlippedBehaviour>().flippedObj = flippedObj;
             flippedObj.GetComponent<FlippedBehaviour>().flippedObj = gObj;
+
+            this.sceneController.sharedCount++; // need to remember that some messages may arrive OUT OR ORDER so CHECK THIS
+            this.sceneController.sharedObjMap.Add(createMessage.id, gObj.GetComponent<SharedObject>());
         }
         if (jm.message is ManipulateMessage)
         {
