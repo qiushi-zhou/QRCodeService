@@ -49,6 +49,14 @@ public class FlippedBehaviour : MonoBehaviour
         Vector3 updatedLocalPos = flippedLocalPos;
         updatedLocalPos.y *= -1;
 
+        
+
         this.transform.position = this.mirrorObj.transform.TransformPoint(updatedLocalPos);
+
+        this.transform.localScale = new Vector3(this.flippedObj.transform.localScale.x * -1, this.flippedObj.transform.localScale.y, this.flippedObj.transform.localScale.z);
+
+        Vector3 rot = this.flippedObj.transform.rotation.eulerAngles;
+        rot = new Vector3(rot.x , rot.y + 180, rot.z );
+        this.transform.rotation = Quaternion.Euler(rot);
     }
 }
