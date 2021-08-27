@@ -96,7 +96,7 @@ public class UDPController : MonoBehaviour
             flippedObj.transform.localScale = new Vector3(flippedObj.transform.localScale.x * -1, flippedObj.transform.localScale.y, flippedObj.transform.localScale.z);
 
             Vector3 rot = flippedObj.transform.rotation.eulerAngles;
-            rot = new Vector3(rot.x , rot.y +180, rot.z  );
+            rot = new Vector3(rot.x , rot.y *-1, rot.z  );
             flippedObj.transform.rotation = Quaternion.Euler(rot);
 
             //add hololens specific scripts to flipped obj
