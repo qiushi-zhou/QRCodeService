@@ -68,6 +68,8 @@ public class UDPController : MonoBehaviour
             GameObject gObj = Instantiate(prefab, Pos, Quaternion.LookRotation(forward,Upward));
             Debug.Log("created at: "+ createMessage.position);
 
+            gObj.transform.localScale = new Vector3(gObj.transform.localScale.x * -1, gObj.transform.localScale.y, gObj.transform.localScale.z);
+
             //update id of sharedObj
             gObj.GetComponent<SharedObject>().id = createMessage.id;
 
@@ -92,6 +94,10 @@ public class UDPController : MonoBehaviour
             flippedPosition = this.sceneController.mirrorObj.transform.TransformPoint(flippedPosition);
             //using same forward and up for now..  might need to flip these as well wrt to mirrorObj
             GameObject flippedObj = Instantiate(prefab, flippedPosition, Quaternion.LookRotation(forward, Upward));
+
+            Vector3 rot = flippedObj.transform.rotation.eulerAngles;
+            rot = new Vector3(rot.x , rot.y * -1, rot.z  );
+            flippedObj.transform.rotation = Quaternion.Euler(rot);
 
             //add hololens specific scripts to flipped obj
             flippedObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ConstraintManager>();
