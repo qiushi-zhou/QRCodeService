@@ -21,12 +21,6 @@ public class SceneController : MonoBehaviour
         this.sharedObjMap = new Dictionary<int, SharedObject>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
     // allow creation of object only when a mirrorObj has been created here
     // i.e., after we have calibrated the mirror and holoLens
     public void SendCreateMsg(string prefabName, int id, SharedObject obj)
@@ -40,8 +34,6 @@ public class SceneController : MonoBehaviour
         this.sharedObjMap.Add(obj.id, obj);
     }
 
-    // Triggered by the speech command "Done"
-    // used in GlobalSpeechHandler
     // locks the mirror clone in place
     public void CompleteCalibration()
     {
@@ -50,7 +42,6 @@ public class SceneController : MonoBehaviour
 
         //send Calibration Done message
         this.udpController.SendCalibrationDoneMessage();
-        //this.udpController.SendManipulateMessage(0, Vector3.zero, Vector3.zero, Vector3.zero);
     }
 
 }

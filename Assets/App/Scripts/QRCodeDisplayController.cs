@@ -50,7 +50,6 @@ public class QRCodeDisplayController : MonoBehaviour
         }
     }
 
-
     private void QRCodeTrackingService_Initialized(object sender, EventArgs e)
     {
         StartTracking();

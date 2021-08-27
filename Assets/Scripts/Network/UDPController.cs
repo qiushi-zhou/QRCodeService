@@ -59,7 +59,7 @@ public class UDPController : MonoBehaviour
 
             CreateMessage createMessage = (CreateMessage)jm.message;
 
-            //creates an object in relation to MIRROR SPACE
+            //creates an object in relation to REAL SPACE
             Vector3 Pos = this.sceneController.mirrorObj.transform.TransformPoint(createMessage.position);
             Vector3 forward = this.sceneController.mirrorObj.transform.TransformDirection(createMessage.forward);
             Vector3 Upward = this.sceneController.mirrorObj.transform.TransformDirection(createMessage.upward);
@@ -67,8 +67,6 @@ public class UDPController : MonoBehaviour
             GameObject prefab = (GameObject)Resources.Load("sharedPrefabs/"+createMessage.prefabName, typeof(GameObject));
             GameObject gObj = Instantiate(prefab, Pos, Quaternion.LookRotation(forward,Upward));
             Debug.Log("created at: "+ createMessage.position);
-
-            gObj.transform.localScale = new Vector3(gObj.transform.localScale.x * -1, gObj.transform.localScale.y, gObj.transform.localScale.z);
 
             //update id of sharedObj
             gObj.GetComponent<SharedObject>().id = createMessage.id;
@@ -88,15 +86,17 @@ public class UDPController : MonoBehaviour
             this.sceneController.sharedObjMap.Add(createMessage.id, gObj.GetComponent<SharedObject>());
 
 
-            //create a Mirrored object representing REAL SPACE
+            //create a Mirrored object representing MIRROR SPACE
             Vector3 flippedPosition = createMessage.position;
             flippedPosition.y = -flippedPosition.y;
             flippedPosition = this.sceneController.mirrorObj.transform.TransformPoint(flippedPosition);
             //using same forward and up for now..  might need to flip these as well wrt to mirrorObj
             GameObject flippedObj = Instantiate(prefab, flippedPosition, Quaternion.LookRotation(forward, Upward));
 
+            flippedObj.transform.localScale = new Vector3(flippedObj.transform.localScale.x * -1, flippedObj.transform.localScale.y, flippedObj.transform.localScale.z);
+
             Vector3 rot = flippedObj.transform.rotation.eulerAngles;
-            rot = new Vector3(rot.x , rot.y * -1, rot.z  );
+            rot = new Vector3(rot.x , rot.y +180, rot.z  );
             flippedObj.transform.rotation = Quaternion.Euler(rot);
 
             //add hololens specific scripts to flipped obj
@@ -122,8 +122,6 @@ public class UDPController : MonoBehaviour
                 this.sceneController.mirrorObj.transform.TransformDirection(manipulateMessage.upward)
                 );
         }
-        
-
     }
 
     public void SendTest()
