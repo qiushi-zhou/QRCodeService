@@ -55,13 +55,16 @@ public class FlippedBehaviour : MonoBehaviour
         // inspired from:
         // https://forum.unity.com/threads/how-to-mirror-a-euler-angle-or-rotation.90650/
         // http://www.euclideanspace.com/maths/geometry/affine/reflection/quaternion/index.htm
-        Quaternion flippedGlobalRot = this.flippedObj.transform.rotation;
+        //Quaternion flippedGlobalRot = this.flippedObj.transform.rotation;
         MeshFilter mirrorPlane = this.mirrorObj.GetComponent<MeshFilter>();
         Vector3 mirrorNormal = mirrorPlane.transform.TransformDirection(mirrorPlane.mesh.normals[0]);
-        Debug.Log(mirrorNormal);
-        Quaternion mirrorQuat = new Quaternion(mirrorNormal.x, mirrorNormal.y, mirrorNormal.z, 0);
+        //Quaternion mirrorQuat = new Quaternion(mirrorNormal.x, mirrorNormal.y, mirrorNormal.z, 0);
 
-        this.transform.rotation = mirrorQuat * flippedGlobalRot * mirrorQuat;
+        //this.transform.rotation = mirrorQuat * flippedGlobalRot * new Quaternion(-mirrorQuat.x, -mirrorQuat.y, -mirrorQuat.z, mirrorQuat.w);
+
+        Vector3 forward = this.flippedObj.transform.forward;
+        Vector3 mirrored = Vector3.Reflect(forward, mirrorNormal);
+        this.transform.rotation = Quaternion.LookRotation(mirrored, this.flippedObj.transform.up);
 
 
         //Vector3 rot = this.flippedObj.transform.rotation.eulerAngles;

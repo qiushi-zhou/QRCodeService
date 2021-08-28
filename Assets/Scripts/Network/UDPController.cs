@@ -96,12 +96,16 @@ public class UDPController : MonoBehaviour
             flippedObj.transform.localScale = new Vector3(flippedObj.transform.localScale.x * -1, flippedObj.transform.localScale.y, flippedObj.transform.localScale.z);
 
             //TODO
-            Quaternion objGlobalRot = gObj.transform.rotation;
+            //Quaternion objGlobalRot = gObj.transform.rotation;
             MeshFilter mirrorPlane = this.sceneController.mirrorObj.GetComponent<MeshFilter>();
             Vector3 mirrorNormal = mirrorPlane.transform.TransformDirection(mirrorPlane.mesh.normals[0]);
-            Quaternion mirrorQuat = new Quaternion(mirrorNormal.x, mirrorNormal.y, mirrorNormal.z, 0);
+            //Quaternion mirrorQuat = new Quaternion(mirrorNormal.x, mirrorNormal.y, mirrorNormal.z, 0);
 
-            flippedObj.transform.rotation = mirrorQuat * objGlobalRot * mirrorQuat;
+            //flippedObj.transform.rotation = mirrorQuat * objGlobalRot * mirrorQuat;
+
+            Vector3 gObjForw = gObj.transform.forward;
+            Vector3 mirrored = Vector3.Reflect(gObjForw, mirrorNormal);
+            this.transform.rotation = Quaternion.LookRotation(mirrored, gObj.transform.up);
 
             /*
             Vector3 rot = flippedObj.transform.rotation.eulerAngles;
