@@ -101,7 +101,7 @@ public class UDPController : MonoBehaviour
             Vector3 mirrorNormal = mirrorPlane.transform.TransformDirection(mirrorPlane.mesh.normals[0]);
             Quaternion mirrorQuat = new Quaternion(mirrorNormal.x, mirrorNormal.y, mirrorNormal.z, 0);
 
-            this.transform.rotation = mirrorQuat * objGlobalRot * mirrorQuat;
+            flippedObj.transform.rotation = mirrorQuat * objGlobalRot * mirrorQuat;
 
             /*
             Vector3 rot = flippedObj.transform.rotation.eulerAngles;
