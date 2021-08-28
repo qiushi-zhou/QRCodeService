@@ -124,6 +124,9 @@ public class UDPController : MonoBehaviour
             flippedObj.AddComponent<FlippedBehaviour>();
             gObj.GetComponent<FlippedBehaviour>().flippedObj = flippedObj;
             flippedObj.GetComponent<FlippedBehaviour>().flippedObj = gObj;
+
+            // assign flipped object to ManipulationUpdater
+            gObj.GetComponent<ManipulationUpdater>().flippedObject = flippedObj;
         }
         if (jm.message is ManipulateMessage)
         {

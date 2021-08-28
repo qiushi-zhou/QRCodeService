@@ -8,7 +8,7 @@ public class FlippedBehaviour : MonoBehaviour
 
     public GameObject flippedObj;
 
-    private bool isInteracted = false;
+    public bool isInteracted = false;
 
     ObjectManipulator objectManipulator;
 

@@ -11,6 +11,7 @@ public class ManipulationUpdater : MonoBehaviour
     ObjectManipulator objectManipulator;
     public UDPController udpController;
     public GameObject mirrorObj;
+    public GameObject flippedObject;
 
     private bool isInteracted = false;
 
@@ -40,7 +41,7 @@ public class ManipulationUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.isInteracted)
+        if (this.isInteracted || flippedObject.GetComponent<FlippedBehaviour>().isInteracted)
         {
             this.udpController.SendManipulateMessage(
                 this.sObj.id, 
