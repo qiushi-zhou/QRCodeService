@@ -169,7 +169,7 @@ public class UDPController : MonoBehaviour
         createMsg.id = id;
         createMsg.position = position;
         createMsg.forward = forward;
-        createMsg.forward = upward;
+        createMsg.upward = upward;
         jm.message = createMsg;
         byte[] msg = Serializer.Serialize<JsonMessage>(jm);
         this.socket.SendMessage(msg);
@@ -192,7 +192,7 @@ public class UDPController : MonoBehaviour
         manipulateMsg.id = id;
         manipulateMsg.position = new Vector3(position.x, position.y, position.z);
         manipulateMsg.forward = forward;
-        manipulateMsg.forward = upward;
+        manipulateMsg.upward = upward;
         jm.message = manipulateMsg;
         byte[] msg = Serializer.Serialize<JsonMessage>(jm);
         this.socket.SendMessage(msg);
