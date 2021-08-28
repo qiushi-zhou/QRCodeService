@@ -49,13 +49,24 @@ public class FlippedBehaviour : MonoBehaviour
         Vector3 updatedLocalPos = flippedLocalPos;
         updatedLocalPos.y *= -1;
 
-        // mimic the other's rotation
-
         this.transform.position = this.mirrorObj.transform.TransformPoint(updatedLocalPos);
 
-        Vector3 rot = this.flippedObj.transform.rotation.eulerAngles;
-        rot = new Vector3(rot.x, rot.y *-1, -1* rot.z);
-        this.transform.rotation = Quaternion.Euler(rot);
+        //mimic rotation
+        // inspired from:
+        // https://forum.unity.com/threads/how-to-mirror-a-euler-angle-or-rotation.90650/
+        // http://www.euclideanspace.com/maths/geometry/affine/reflection/quaternion/index.htm
+        Quaternion flippedGlobalRot = this.flippedObj.transform.rotation;
+        MeshFilter mirrorPlane = this.mirrorObj.GetComponent<MeshFilter>();
+        Vector3 mirrorNormal = mirrorPlane.transform.TransformDirection(mirrorPlane.mesh.normals[0]);
+        Debug.Log(mirrorNormal);
+        Quaternion mirrorQuat = new Quaternion(mirrorNormal.x, mirrorNormal.y, mirrorNormal.z, 0);
+
+        this.transform.rotation = mirrorQuat * flippedGlobalRot * mirrorQuat;
+
+
+        //Vector3 rot = this.flippedObj.transform.rotation.eulerAngles;
+        //rot = new Vector3(rot.x, rot.y *-1, -1* rot.z);
+        //this.transform.rotation = Quaternion.Euler(rot);
         //this.transform.rotation = this.flippedObj.transform.rotation;
     }
 }
