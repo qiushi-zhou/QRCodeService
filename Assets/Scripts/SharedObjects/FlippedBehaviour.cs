@@ -63,8 +63,10 @@ public class FlippedBehaviour : MonoBehaviour
         //this.transform.rotation = mirrorQuat * flippedGlobalRot * new Quaternion(-mirrorQuat.x, -mirrorQuat.y, -mirrorQuat.z, mirrorQuat.w);
 
         Vector3 forward = this.flippedObj.transform.forward;
-        Vector3 mirrored = Vector3.Reflect(forward, mirrorNormal);
-        this.transform.rotation = Quaternion.LookRotation(mirrored, this.flippedObj.transform.up);
+        Vector3 upward = this.flippedObj.transform.up;
+        Vector3 mirroredFor = Vector3.Reflect(forward, mirrorNormal);
+        Vector3 mirroredUp = Vector3.Reflect(upward, mirrorNormal);
+        this.transform.rotation = Quaternion.LookRotation(mirroredFor, mirroredUp);
 
 
         //Vector3 rot = this.flippedObj.transform.rotation.eulerAngles;
