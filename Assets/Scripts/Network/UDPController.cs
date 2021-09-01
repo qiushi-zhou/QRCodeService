@@ -8,6 +8,12 @@ public class UDPController : MonoBehaviour
     private NetworkSettings networkSettings;
     public SceneController sceneController;
 
+    public GameObject clip;
+
+    private GameObject shared_braid;
+    private GameObject shared_picture;
+    private GameObject shared_braid_flipped;
+    private GameObject shared_picture_flipped;
 
 #if !UNITY_EDITOR
     
@@ -64,9 +70,13 @@ public class UDPController : MonoBehaviour
             Vector3 forward = this.sceneController.mirrorObj.transform.TransformDirection(createMessage.forward);
             Vector3 Upward = this.sceneController.mirrorObj.transform.TransformDirection(createMessage.upward);
 
+            
             GameObject prefab = (GameObject)Resources.Load("sharedPrefabs/"+createMessage.prefabName, typeof(GameObject));
             GameObject gObj = Instantiate(prefab, Pos, Quaternion.LookRotation(forward,Upward));
             Debug.Log("created at: "+ createMessage.position);
+            gObj.name = createMessage.prefabName;
+
+            
 
             //update id of sharedObj
             gObj.GetComponent<SharedObject>().id = createMessage.id;
@@ -96,7 +106,9 @@ public class UDPController : MonoBehaviour
             flippedPosition = this.sceneController.mirrorObj.transform.TransformPoint(flippedPosition);
             //using same forward and up for now..  might need to flip these as well wrt to mirrorObj
             GameObject flippedObj = Instantiate(prefab, flippedPosition, Quaternion.LookRotation(forward, Upward));
+            flippedObj.name = createMessage.prefabName + "Flipped";
             //flippedObj.GetComponent<MeshRenderer>().enabled = false;
+            
 
             flippedObj.transform.localScale = new Vector3(flippedObj.transform.localScale.x * -1, flippedObj.transform.localScale.y, flippedObj.transform.localScale.z);
 
@@ -106,17 +118,9 @@ public class UDPController : MonoBehaviour
             Vector3 mirrorNormal = mirrorPlane.transform.TransformDirection(mirrorPlane.mesh.normals[0]);
             //Quaternion mirrorQuat = new Quaternion(mirrorNormal.x, mirrorNormal.y, mirrorNormal.z, 0);
 
-            //flippedObj.transform.rotation = mirrorQuat * objGlobalRot * mirrorQuat;
-
             Vector3 gObjForw = gObj.transform.forward;
             Vector3 mirrored = Vector3.Reflect(gObjForw, mirrorNormal);
             this.transform.rotation = Quaternion.LookRotation(mirrored, gObj.transform.up);
-
-            /*
-            Vector3 rot = flippedObj.transform.rotation.eulerAngles;
-            rot = new Vector3(rot.x , rot.y *-1, rot.z  );
-            flippedObj.transform.rotation = Quaternion.Euler(rot);
-            */
 
             //add hololens specific scripts to flipped obj
             flippedObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ConstraintManager>();
@@ -131,6 +135,43 @@ public class UDPController : MonoBehaviour
 
             // assign flipped object to ManipulationUpdater
             gObj.GetComponent<ManipulationUpdater>().flippedObject = flippedObj;
+
+            if (createMessage.prefabName == "shared_paperclip")
+            {
+                clip.transform.position = gObj.transform.position;
+                clip.transform.rotation = gObj.transform.rotation;
+                clip.transform.localScale = gObj.transform.localScale;
+                gObj.SetActive(false);
+                flippedObj.SetActive(false);
+            }
+
+            if (createMessage.prefabName == "shared_picture")
+            {
+                this.shared_picture = gObj;
+                this.shared_picture_flipped = flippedObj;
+                gObj.transform.position += new Vector3(0, 2, 0);
+                flippedObj.transform.position += new Vector3(0, 2, 0);
+                this.SendManipulateMessage(
+                gObj.GetComponent<SharedObject>().id,
+                this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.forward),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.up)
+                );
+            }
+
+            if (createMessage.prefabName == "shared_braid")
+            {
+                this.shared_braid = gObj;
+                this.shared_braid_flipped = flippedObj;
+                gObj.transform.position += new Vector3(0, 2, 0);
+                flippedObj.transform.position += new Vector3(0, 2, 0);
+                this.SendManipulateMessage(
+                gObj.GetComponent<SharedObject>().id,
+                this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.forward),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.up)
+                );
+            }
         }
         if (jm.message is ManipulateMessage)
         {
@@ -144,6 +185,31 @@ public class UDPController : MonoBehaviour
                 this.sceneController.mirrorObj.transform.TransformDirection(manipulateMessage.upward)
                 );
         }
+    }
+
+    public void bringBraid()
+    {
+        shared_braid.transform.position -= new Vector3(0, 2, 0);
+        shared_braid_flipped.transform.position -= new Vector3(0, 2, 0);
+        this.SendManipulateMessage(
+                shared_braid.GetComponent<SharedObject>().id,
+                this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.forward),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.up)
+                );
+        
+    }
+
+    public void bringPicture()
+    {
+        shared_picture.transform.position -= new Vector3(0, 2, 0);
+        shared_picture_flipped.transform.position -= new Vector3(0, 2, 0);
+        this.SendManipulateMessage(
+                shared_picture.GetComponent<SharedObject>().id,
+                this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.forward),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.up)
+                );
     }
 
     public void SendTest()
