@@ -148,9 +148,9 @@ public class UDPController : MonoBehaviour
             if (createMessage.prefabName == "shared_picture")
             {
                 this.shared_picture = gObj;
-                //this.shared_picture_flipped = flippedObj;
+                this.shared_picture_flipped = flippedObj;
                 gObj.transform.position += new Vector3(0, 2, 0);
-                flippedObj.SetActive(false);
+                flippedObj.transform.position += new Vector3(0, 2, 0);
                 this.SendManipulateMessage(
                 gObj.GetComponent<SharedObject>().id,
                 this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
@@ -203,7 +203,7 @@ public class UDPController : MonoBehaviour
     public void bringPicture()
     {
         shared_picture.transform.position -= new Vector3(0, 2, 0);
-        //shared_picture_flipped.transform.position -= new Vector3(0, 2, 0);
+        shared_picture_flipped.transform.position -= new Vector3(0, 2, 0);
         this.SendManipulateMessage(
                 shared_picture.GetComponent<SharedObject>().id,
                 this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
