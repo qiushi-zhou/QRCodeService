@@ -15,6 +15,8 @@ public class UDPController : MonoBehaviour
     private GameObject shared_braid_flipped;
     private GameObject shared_picture_flipped;
 
+    private int clicks = 0;
+
 #if !UNITY_EDITOR
     
     UDPSocket socket;
@@ -149,8 +151,9 @@ public class UDPController : MonoBehaviour
             {
                 this.shared_picture = gObj;
                 this.shared_picture_flipped = flippedObj;
-                gObj.transform.position += new Vector3(0, 2, 0);
-                flippedObj.transform.position += new Vector3(0, 2, 0);
+                flippedObj.SetActive(false);
+                //gObj.transform.position += new Vector3(0, 2, 0);
+                //flippedObj.transform.position += new Vector3(0, 2, 0);
                 this.SendManipulateMessage(
                 gObj.GetComponent<SharedObject>().id,
                 this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
@@ -163,8 +166,9 @@ public class UDPController : MonoBehaviour
             {
                 this.shared_braid = gObj;
                 this.shared_braid_flipped = flippedObj;
-                gObj.transform.position += new Vector3(0, 2, 0);
-                flippedObj.transform.position += new Vector3(0, 2, 0);
+                //flippedObj.SetActive(false);
+                //gObj.transform.position += new Vector3(0, 2, 0);
+                //flippedObj.transform.position += new Vector3(0, 2, 0);
                 this.SendManipulateMessage(
                 gObj.GetComponent<SharedObject>().id,
                 this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
@@ -187,8 +191,23 @@ public class UDPController : MonoBehaviour
         }
     }
 
+    public void handleClick() { 
+        if (clicks == 0)
+        {
+            bringBraid();
+        }
+        else
+        {
+            bringPicture();
+        }
+        clicks++;
+    }
+
     public void bringBraid()
     {
+        GameObject prefabMail1 = (GameObject)Resources.Load("sharedPrefabs/Mail1", typeof(GameObject));
+        GameObject gObjMail1 = Instantiate(prefabMail1, new Vector3(this.transform.position.x - 0.3f, this.transform.position.y + 0.3f, this.transform.position.z + 0.3f), Quaternion.LookRotation(Vector3.forward, Vector3.up));
+
         shared_braid.transform.position -= new Vector3(0, 2, 0);
         shared_braid_flipped.transform.position -= new Vector3(0, 2, 0);
         this.SendManipulateMessage(
@@ -202,6 +221,9 @@ public class UDPController : MonoBehaviour
 
     public void bringPicture()
     {
+        GameObject prefabMail2 = (GameObject)Resources.Load("sharedPrefabs/Mail2", typeof(GameObject));
+        GameObject gObjMail2 = Instantiate(prefabMail2, new Vector3(this.transform.position.x + 0.3f, this.transform.position.y + 0.3f, this.transform.position.z + 0.3f), Quaternion.LookRotation(Vector3.forward, Vector3.up));
+
         shared_picture.transform.position -= new Vector3(0, 2, 0);
         shared_picture_flipped.transform.position -= new Vector3(0, 2, 0);
         this.SendManipulateMessage(
