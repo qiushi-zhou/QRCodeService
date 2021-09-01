@@ -6,8 +6,11 @@ using Microsoft.MixedReality.Toolkit.UI;
 public class PaperClipBehaviour : MonoBehaviour
 {
     private GameObject udpController;
+    public GameObject mail1;
+    public GameObject mail2;
     public void InstantiateMails()
     {
+        /*
         Debug.Log("touch started");
 
         GameObject prefabMail1 = (GameObject)Resources.Load("sharedPrefabs/Mail1", typeof(GameObject));
@@ -20,6 +23,11 @@ public class PaperClipBehaviour : MonoBehaviour
         udpController.GetComponent<UDPController>().bringBraid();
         udpController.GetComponent<UDPController>().bringPicture();
 
+        this.transform.gameObject.SetActive(false);
+        */
+
+        mail1.SetActive(true);
+        mail2.SetActive(true);
         this.transform.gameObject.SetActive(false);
     }
 
