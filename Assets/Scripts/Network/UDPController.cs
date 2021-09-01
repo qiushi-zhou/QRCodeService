@@ -70,16 +70,20 @@ public class UDPController : MonoBehaviour
 
             //update id of sharedObj
             gObj.GetComponent<SharedObject>().id = createMessage.id;
+            gObj.GetComponent<SharedObject>().isBodyAnchored = createMessage.isBodyAnchored;
 
+            if (!gObj.GetComponent<SharedObject>().isBodyAnchored)
+            {
+                //add hololens specific scripts
+                gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ConstraintManager>();
+                gObj.AddComponent<Microsoft.MixedReality.Toolkit.Input.NearInteractionGrabbable>();
+                gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ObjectManipulator>();
+                gObj.AddComponent<ManipulationUpdater>(); // do not add this to flippedObj
 
-            //add hololens specific scripts
-            gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ConstraintManager>();
-            gObj.AddComponent<Microsoft.MixedReality.Toolkit.Input.NearInteractionGrabbable>();
-            gObj.AddComponent<Microsoft.MixedReality.Toolkit.UI.ObjectManipulator>();
-            gObj.AddComponent<ManipulationUpdater>(); // do not add this to flippedObj
-
-            gObj.GetComponent<ManipulationUpdater>().udpController = this;
-            gObj.GetComponent<ManipulationUpdater>().mirrorObj = this.sceneController.mirrorObj;
+                gObj.GetComponent<ManipulationUpdater>().udpController = this;
+                gObj.GetComponent<ManipulationUpdater>().mirrorObj = this.sceneController.mirrorObj;
+            }
+            
 
 
             this.sceneController.sharedCount++; // need to remember that some messages may arrive OUT OR ORDER so CHECK THIS
@@ -92,7 +96,7 @@ public class UDPController : MonoBehaviour
             flippedPosition = this.sceneController.mirrorObj.transform.TransformPoint(flippedPosition);
             //using same forward and up for now..  might need to flip these as well wrt to mirrorObj
             GameObject flippedObj = Instantiate(prefab, flippedPosition, Quaternion.LookRotation(forward, Upward));
-            flippedObj.GetComponent<MeshRenderer>().enabled = false;
+            //flippedObj.GetComponent<MeshRenderer>().enabled = false;
 
             flippedObj.transform.localScale = new Vector3(flippedObj.transform.localScale.x * -1, flippedObj.transform.localScale.y, flippedObj.transform.localScale.z);
 
