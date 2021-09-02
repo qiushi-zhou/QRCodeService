@@ -189,6 +189,14 @@ public class UDPController : MonoBehaviour
                 this.sceneController.mirrorObj.transform.TransformDirection(manipulateMessage.forward),
                 this.sceneController.mirrorObj.transform.TransformDirection(manipulateMessage.upward)
                 );
+            GameObject flippedObj = obj.GetComponent<FlippedBehaviour>().flippedObj;
+            flippedObj.transform.position = obj.transform.position;
+            flippedObj.transform.rotation = obj.transform.rotation;
+            if(manipulateMessage.id == shared_braid.GetComponent<SharedObject>().id)
+            {
+                shared_braid.SetActive(false);
+                shared_braid_flipped.SetActive(false);
+            }
         }
     }
 
