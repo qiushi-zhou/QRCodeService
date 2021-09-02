@@ -50,6 +50,17 @@ public class ManipulationUpdater : MonoBehaviour
                 this.mirrorObj.transform.InverseTransformDirection(this.transform.up)
                 );
             //Debug.Log("SendManipulateMessage obj id: " + this.sObj.id);
+            
+        }
+
+        if (this.gameObject == this.udpController.shared_picture)
+        {
+            this.udpController.SendManipulateMessage(
+                this.sObj.id,
+                this.mirrorObj.transform.InverseTransformPoint(this.flippedObject.transform.position),
+                this.mirrorObj.transform.InverseTransformDirection(this.flippedObject.transform.forward),
+                this.mirrorObj.transform.InverseTransformDirection(this.flippedObject.transform.up)
+                );
         }
     }
 

@@ -10,10 +10,10 @@ public class UDPController : MonoBehaviour
 
     public GameObject clip;
 
-    private GameObject shared_braid;
-    private GameObject shared_picture;
-    private GameObject shared_braid_flipped;
-    private GameObject shared_picture_flipped;
+    public GameObject shared_braid;
+    public GameObject shared_picture;
+    public GameObject shared_braid_flipped;
+    public GameObject shared_picture_flipped;
 
     private int clicks = 0;
     public Transform Camera;
@@ -152,7 +152,7 @@ public class UDPController : MonoBehaviour
             {
                 this.shared_picture = gObj;
                 this.shared_picture_flipped = flippedObj;
-                flippedObj.SetActive(false);
+                flippedObj.GetComponent<MeshRenderer>().enabled = false;
                 //gObj.transform.position += new Vector3(0, 2, 0);
                 //flippedObj.transform.position += new Vector3(0, 2, 0);
                 this.SendManipulateMessage(
