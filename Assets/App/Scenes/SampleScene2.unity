@@ -1339,6 +1339,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneController: {fileID: 850870368}
   clip: {fileID: 1819274060}
+  shared_braid: {fileID: 0}
+  shared_picture: {fileID: 0}
+  shared_braid_flipped: {fileID: 0}
+  shared_picture_flipped: {fileID: 0}
   Camera: {fileID: 963194228}
 --- !u!1 &466487159
 GameObject:
@@ -3454,7 +3458,7 @@ PrefabInstance:
     - target: {fileID: 5366888259847643101, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: -2.228
       objectReference: {fileID: 0}
     - target: {fileID: 5366888259847643101, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
         type: 3}
