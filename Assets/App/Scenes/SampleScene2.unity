@@ -1339,6 +1339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneController: {fileID: 850870368}
   clip: {fileID: 1819274060}
+  Camera: {fileID: 963194228}
 --- !u!1 &466487159
 GameObject:
   m_ObjectHideFlags: 0
@@ -3498,7 +3499,12 @@ PrefabInstance:
     - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
         type: 3}
       propertyPath: TouchBegin.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
+        type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
         type: 3}
@@ -3508,7 +3514,7 @@ PrefabInstance:
     - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
         type: 3}
       propertyPath: TouchBegin.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: bringBraid
+      value: handleClick
       objectReference: {fileID: 0}
     - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
         type: 3}
@@ -3533,6 +3539,51 @@ PrefabInstance:
     - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
         type: 3}
       propertyPath: TouchBegin.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
+        type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
+        type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
+        type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 436545710}
+    - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
+        type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
+        type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
+        type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 436545708}
+    - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
+        type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: handleClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
+        type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095461453765908658, guid: 6e47a80b4be46cd4e8bbbd98501fd7d7,
+        type: 3}
+      propertyPath: TouchBegin.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -16,6 +16,7 @@ public class UDPController : MonoBehaviour
     private GameObject shared_picture_flipped;
 
     private int clicks = 0;
+    public Transform Camera;
 
 #if !UNITY_EDITOR
     
@@ -196,7 +197,7 @@ public class UDPController : MonoBehaviour
         {
             bringBraid();
         }
-        else
+        else if (clicks ==1)
         {
             bringPicture();
         }
@@ -206,7 +207,7 @@ public class UDPController : MonoBehaviour
     public void bringBraid()
     {
         GameObject prefabMail1 = (GameObject)Resources.Load("sharedPrefabs/Mail1", typeof(GameObject));
-        GameObject gObjMail1 = Instantiate(prefabMail1, new Vector3(this.transform.position.x - 0.3f, this.transform.position.y + 0.3f, this.transform.position.z + 0.3f), Quaternion.LookRotation(Vector3.forward, Vector3.up));
+        GameObject gObjMail1 = Instantiate(prefabMail1, new Vector3(Camera.position.x , Camera.position.y , Camera.position.z + 0.5f), Quaternion.LookRotation(Vector3.forward, Vector3.up));
 
         shared_braid.transform.position -= new Vector3(0, 2, 0);
         shared_braid_flipped.transform.position -= new Vector3(0, 2, 0);
@@ -222,7 +223,7 @@ public class UDPController : MonoBehaviour
     public void bringPicture()
     {
         GameObject prefabMail2 = (GameObject)Resources.Load("sharedPrefabs/Mail2", typeof(GameObject));
-        GameObject gObjMail2 = Instantiate(prefabMail2, new Vector3(this.transform.position.x + 0.3f, this.transform.position.y + 0.3f, this.transform.position.z + 0.3f), Quaternion.LookRotation(Vector3.forward, Vector3.up));
+        GameObject gObjMail2 = Instantiate(prefabMail2, new Vector3(Camera.position.x, Camera.position.y, Camera.position.z + 0.5f), Quaternion.LookRotation(Vector3.forward, Vector3.up));
 
         shared_picture.transform.position -= new Vector3(0, 2, 0);
         shared_picture_flipped.transform.position -= new Vector3(0, 2, 0);
