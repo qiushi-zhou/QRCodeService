@@ -157,9 +157,9 @@ public class UDPController : MonoBehaviour
                 //flippedObj.transform.position += new Vector3(0, 2, 0);
                 this.SendManipulateMessage(
                 gObj.GetComponent<SharedObject>().id,
-                this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
-                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.forward),
-                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.up)
+                this.sceneController.mirrorObj.transform.InverseTransformPoint(gObj.transform.position),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(gObj.transform.forward),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(gObj.transform.up)
                 );
             }
 
@@ -172,9 +172,9 @@ public class UDPController : MonoBehaviour
                 //flippedObj.transform.position += new Vector3(0, 2, 0);
                 this.SendManipulateMessage(
                 gObj.GetComponent<SharedObject>().id,
-                this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
-                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.forward),
-                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.up)
+                this.sceneController.mirrorObj.transform.InverseTransformPoint(gObj.transform.position),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(gObj.transform.forward),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(gObj.transform.up)
                 );
             }
         }
@@ -221,9 +221,9 @@ public class UDPController : MonoBehaviour
         shared_braid_flipped.transform.position -= new Vector3(0, 2, 0);
         this.SendManipulateMessage(
                 shared_braid.GetComponent<SharedObject>().id,
-                this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
-                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.forward),
-                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.up)
+                this.sceneController.mirrorObj.transform.InverseTransformPoint(shared_braid.transform.position),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(shared_braid.transform.forward),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(shared_braid.transform.up)
                 );
         
     }
@@ -237,9 +237,9 @@ public class UDPController : MonoBehaviour
         shared_picture_flipped.transform.position -= new Vector3(0, 2, 0);
         this.SendManipulateMessage(
                 shared_picture.GetComponent<SharedObject>().id,
-                this.sceneController.mirrorObj.transform.InverseTransformPoint(this.transform.position),
-                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.forward),
-                this.sceneController.mirrorObj.transform.InverseTransformDirection(this.transform.up)
+                this.sceneController.mirrorObj.transform.InverseTransformPoint(shared_picture_flipped.transform.position),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(shared_picture_flipped.transform.forward),
+                this.sceneController.mirrorObj.transform.InverseTransformDirection(shared_picture_flipped.transform.up)
                 );
     }
 
