@@ -208,6 +208,7 @@ public class UDPController : MonoBehaviour
         else if (clicks ==1)
         {
             bringPicture();
+            clip.GetComponent<MeshRenderer>().material.color = Color.white;
         }
         clicks++;
     }
@@ -219,6 +220,11 @@ public class UDPController : MonoBehaviour
 
         shared_braid.transform.position -= new Vector3(0, 2, 0);
         shared_braid_flipped.transform.position -= new Vector3(0, 2, 0);
+
+        Vector3 rot = shared_braid_flipped.transform.rotation.eulerAngles;
+        rot = new Vector3(rot.x, rot.y + 180, rot.z);
+        shared_braid_flipped.transform.rotation = Quaternion.Euler(rot);
+
         this.SendManipulateMessage(
                 shared_braid.GetComponent<SharedObject>().id,
                 this.sceneController.mirrorObj.transform.InverseTransformPoint(shared_braid.transform.position),

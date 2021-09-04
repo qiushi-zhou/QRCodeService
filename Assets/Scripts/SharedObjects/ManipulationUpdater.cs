@@ -53,7 +53,7 @@ public class ManipulationUpdater : MonoBehaviour
             
         }
 
-        if (this.gameObject == this.udpController.shared_picture && transform.position.z > 0)
+        if (this.isInteracted && this.gameObject == this.udpController.shared_picture && transform.position.z > 0)
         {
             this.udpController.SendManipulateMessage(
                 this.sObj.id,
